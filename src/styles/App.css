@@ -1,0 +1,221 @@
+/* ============================================================
+   FILE: src/styles/App.css
+   FUNGSI: CSS global — variabel warna, font, reset, utilitas.
+           Semua file CSS lain menggunakan variabel dari sini.
+   ============================================================ */
+
+/* --- Import Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&display=swap');
+
+/* --- CSS Variables (Palet Warna Dark Mode Developer) --- */
+:root {
+  /* Background Layers */
+  --bg-primary: #0a0e17;       /* Paling gelap - background utama */
+  --bg-secondary: #111827;     /* Sedikit terang - card background */
+  --bg-tertiary: #1a2235;      /* Lebih terang - hover states */
+  --bg-glass: rgba(17, 24, 39, 0.8); /* Transparan untuk glass effect */
+
+  /* Text Colors */
+  --text-primary: #e2e8f0;     /* Putih terang - teks utama */
+  --text-secondary: #94a3b8;   /* Abu-abu - teks pendukung */
+  --text-muted: #4b5563;       /* Redup - teks tidak penting */
+
+  /* Accent Colors */
+  --accent-cyan: #22d3ee;      /* Cyan - warna aksen utama */
+  --accent-blue: #3b82f6;      /* Biru - aksen sekunder */
+  --accent-green: #4ade80;     /* Hijau - status sukses */
+  --accent-purple: #a855f7;    /* Ungu - aksen tersier */
+
+  /* Gradient */
+  --gradient-primary: linear-gradient(135deg, #22d3ee, #3b82f6);
+  --gradient-card: linear-gradient(145deg, #111827, #1a2235);
+
+  /* Border */
+  --border-color: rgba(34, 211, 238, 0.15);
+  --border-hover: rgba(34, 211, 238, 0.4);
+
+  /* Shadow */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(34, 211, 238, 0.2);
+
+  /* Typography */
+  --font-body: 'Sora', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing & Sizing */
+  --section-padding: 80px 20px;
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+
+  /* Transition */
+  --transition: all 0.3s ease;
+}
+
+/* --- Reset & Base Styles --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Efek noise texture halus di background */
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(34, 211, 238, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
+}
+
+/* --- Scrollbar Custom (biar keliatan keren) --- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+  background: var(--accent-cyan);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+
+/* --- Utility Classes --- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: var(--section-padding);
+}
+
+.section-title {
+  font-family: var(--font-body);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.section-title span {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 48px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.section-subtitle::before {
+  content: '// ';
+  color: var(--accent-cyan);
+}
+
+/* Tag/Badge style */
+.tech-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid var(--border-color);
+  color: var(--accent-cyan);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  transition: var(--transition);
+}
+
+.tech-tag:hover {
+  background: rgba(34, 211, 238, 0.2);
+  border-color: var(--accent-cyan);
+}
+
+/* Tombol utama */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--gradient-primary);
+  color: #0a0e17;
+  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  letter-spacing: 0.3px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Tombol outline */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 28px;
+  background: transparent;
+  color: var(--accent-cyan);
+  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border: 1px solid var(--accent-cyan);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  background: rgba(34, 211, 238, 0.1);
+  transform: translateY(-2px);
+}
+
+/* --- Animasi Global --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* --- Responsif Dasar --- */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 60px 16px;
+  }
+}
