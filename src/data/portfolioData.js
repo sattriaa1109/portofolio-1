@@ -9,8 +9,8 @@ export const profileData = {
   role: "Backend Developer",
   tagline: "Building robust systems from the server side — one API at a time.",
   email: "satlfc767@gmail.com",
-  github: "https://github.com/usernamekamu",
-  linkedin: "https://linkedin.com/in/usernamekamu",
+  github: "https://github.com/sattriaa1109",
+  linkedin: "https://www.linkedin.com/in/satriaaa-pamungkass-12a795335/",
   location: "Indonesia",
   bio: "Siswa SMK Kelas XI jurusan Rekayasa Perangkat Lunak yang passionate di bidang Backend Development. Saya senang membangun sistem yang efisien, skalabel, dan andal menggunakan Golang, Dart, dan Node.js.",
 };
@@ -126,5 +126,15 @@ export const projectsData = [
     github: "https://github.com/usernamekamu/diary-app-flutter",
     demo: null,
     color: "#0175C2",
+  },
+  {
+    id: 4,
+    title: "Waktu Sholat Web App",
+    description: "Aplikasi pengingat jadwal sholat interaktif berbasis web. Menampilkan jadwal sholat secara akurat untuk berbagai wilayah di Indonesia. Dilengkapi dengan desain responsif dan elegan.",
+    tech: ["React.js", "Vite", "API", "JavaScript"],
+    github: "https://github.com/sattriaa1109/waktu-sholat",
+    demo: "https://waktu-sholat-blue.vercel.app/",
+    color: "#22d3ee",
+    image: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=2076&auto=format&fit=crop",
   },
 ];

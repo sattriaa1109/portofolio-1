@@ -5,7 +5,7 @@
 
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { projectsData } from "../data/portfolioData";
-import "../styles/components.css";
+import "../styles/Projects.css";
 
 // Ikon per teknologi (emoji sebagai alternatif mudah)
 const TECH_ICON = {
@@ -39,49 +39,59 @@ function Projects() {
               className="project-card"
               style={{ "--card-color": project.color }} // CSS variable dinamis
             >
-              {/* Baris atas: ikon + link */}
-              <div className="project-top">
-                <div className="project-icon">
-                  {/* Ikon berdasarkan tech stack pertama */}
-                  {TECH_ICON[project.tech[0]] || "💻"}
+              {/* Gambar / Preview Proyek */}
+              {project.image && (
+                <div className="project-image-wrapper">
+                  <img src={project.image} alt={project.title} className="project-image" />
+                  <div className="project-image-overlay"></div>
                 </div>
-                <div className="project-links">
-                  {/* Link GitHub */}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                      aria-label="GitHub Repository"
-                    >
-                      <FiGithub />
-                    </a>
-                  )}
-                  {/* Link Demo (jika ada) */}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                      aria-label="Live Demo"
-                    >
-                      <FiExternalLink />
-                    </a>
-                  )}
+              )}
+
+              <div className="project-content">
+                {/* Baris atas: ikon + link */}
+                <div className="project-top">
+                  <div className="project-icon">
+                    {/* Ikon berdasarkan tech stack pertama */}
+                    {TECH_ICON[project.tech[0]] || "💻"}
+                  </div>
+                  <div className="project-links">
+                    {/* Link GitHub */}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                        aria-label="GitHub Repository"
+                      >
+                        <FiGithub />
+                      </a>
+                    )}
+                    {/* Link Demo (jika ada) */}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                        aria-label="Live Demo"
+                      >
+                        <FiExternalLink />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              {/* Judul & Deskripsi */}
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-desc">{project.description}</p>
+                {/* Judul & Deskripsi */}
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
 
-              {/* Tech Tags */}
-              <div className="project-tech">
-                {project.tech.map((t) => (
-                  <span key={t} className="tech-tag">{t}</span>
-                ))}
+                {/* Tech Tags */}
+                <div className="project-tech">
+                  {project.tech.map((t) => (
+                    <span key={t} className="tech-tag">{t}</span>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
