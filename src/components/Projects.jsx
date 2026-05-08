@@ -1,104 +1,162 @@
-// ============================================================
-// FILE: src/components/Projects.jsx
-// FUNGSI: Menampilkan galeri proyek dalam bentuk kartu (card grid).
-// ============================================================
-
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { projectsData } from "../data/portfolioData";
+import TextReveal from "./TextReveal";
 import "../styles/Projects.css";
 
-// Ikon per teknologi (emoji sebagai alternatif mudah)
-const TECH_ICON = {
-  Golang: "🔵",
-  "Node.js": "🟢",
-  Dart: "🩵",
-  Flutter: "🩵",
-  PostgreSQL: "🐘",
-  MongoDB: "🍃",
-  Docker: "🐳",
-  JWT: "🔐",
-  Express: "⚡",
-  "Express.js": "⚡",
-  Provider: "🔄",
-  Hive: "🐝",
-};
+gsap.registerPlugin(ScrollTrigger);
 
-function Projects() {
+const FALLBACK_IMGS = [
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=600&auto=format&fit=crop",
+];
+
+export default function Projects() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Image reveal scale: 1.12 → 1.0 on scroll
+      gsap.utils.toArray(".project-img-wrap img").forEach((img) => {
+        gsap.to(img, {
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img.parentElement,
+            start: "top 90%",
+            end: "bottom 30%",
+            scrub: true,
+          },
+        });
+      });
+
+      // Latest works image scale
+      gsap.utils.toArray(".lw-img-wrap img").forEach((img) => {
+        gsap.to(img, {
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img.parentElement,
+            start: "top 95%",
+            end: "bottom 40%",
+            scrub: true,
+          },
+        });
+      });
+    }, ref);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="projects section" id="projects">
-      <div className="container">
-        <h2 className="section-title">
-          Galeri <span>Proyek</span>
-        </h2>
-        <p className="section-subtitle">apa yang sudah saya bangun</p>
+    <div ref={ref}>
+      {/* ── Selected Works — alternating rows ── */}
+      <section className="works-section" id="works">
+        <div className="container">
+          <div className="works-header">
+            <div className="sec-label">Portfolio</div>
+            <h2 className="sec-heading">
+              <TextReveal text="Selected Works" tag="span" />
+            </h2>
+          </div>
 
-        <div className="projects-grid">
-          {projectsData.map((project) => (
-            <article
-              key={project.id}
-              className="project-card"
-              style={{ "--card-color": project.color }} // CSS variable dinamis
-            >
-              {/* Gambar / Preview Proyek */}
-              {project.image && (
-                <div className="project-image-wrapper">
-                  <img src={project.image} alt={project.title} className="project-image" />
-                  <div className="project-image-overlay"></div>
-                </div>
-              )}
-
-              <div className="project-content">
-                {/* Baris atas: ikon + link */}
-                <div className="project-top">
-                  <div className="project-icon">
-                    {/* Ikon berdasarkan tech stack pertama */}
-                    {TECH_ICON[project.tech[0]] || "💻"}
-                  </div>
-                  <div className="project-links">
-                    {/* Link GitHub */}
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                        aria-label="GitHub Repository"
-                      >
-                        <FiGithub />
-                      </a>
-                    )}
-                    {/* Link Demo (jika ada) */}
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                        aria-label="Live Demo"
-                      >
-                        <FiExternalLink />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {/* Judul & Deskripsi */}
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-desc">{project.description}</p>
-
-                {/* Tech Tags */}
-                <div className="project-tech">
-                  {project.tech.map((t) => (
-                    <span key={t} className="tech-tag">{t}</span>
-                  ))}
+          {projectsData.map((p, i) => (
+            <div key={p.id} className={`project-row ${i % 2 === 0 ? "odd" : "even"}`}>
+              {/* Image */}
+              <div className="project-img-col">
+                <div className="project-img-wrap">
+                  <img
+                    src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
+                    alt={p.title}
+                  />
+                  <span className="project-num">{String(i + 1).padStart(2, "0")}</span>
                 </div>
               </div>
-            </article>
+
+              {/* Text */}
+              <div className="project-text-col">
+                <div className="project-index">Project {String(i + 1).padStart(2, "0")}</div>
+                <h3 className="project-title">{p.title}</h3>
+                <p className="project-desc">{p.description}</p>
+                <div className="project-tags">
+                  {p.tech.map(t => (
+                    <span key={t} className="pill">{t}</span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  {p.github && (
+                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link" aria-label="GitHub">
+                      <FiGithub />
+                    </a>
+                  )}
+                  {p.demo && (
+                    <a href={p.demo} target="_blank" rel="noopener noreferrer" className="project-link" aria-label="Demo">
+                      <FiExternalLink />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* ── Latest Works grid ── */}
+      <section className="latest-section" id="latest-works">
+        <div className="container">
+          <div className="latest-header">
+            <div className="sec-label" style={{ justifyContent: "center" }}>Projects</div>
+            <h2 className="sec-heading" style={{ textAlign: "center" }}>
+              <TextReveal text="Latest Works" tag="span" />
+            </h2>
+          </div>
+
+          <div className="latest-grid">
+            {projectsData.map((p, i) => (
+              <article key={p.id} className="lw-card">
+                <div className="lw-img-wrap">
+                  <img
+                    src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
+                    alt={p.title}
+                  />
+                </div>
+                <div className="lw-body">
+                  <div className="lw-tags">
+                    {p.tech.slice(0, 2).map(t => (
+                      <span key={t} className="pill">{t}</span>
+                    ))}
+                  </div>
+                  <h3 className="lw-title">{p.title}</h3>
+                  <p className="lw-desc">{p.description}</p>
+                  <div className="lw-footer">
+                    <div className="lw-tags">
+                      {p.tech.slice(2).map(t => (
+                        <span key={t} className="pill">{t}</span>
+                      ))}
+                    </div>
+                    <div className="lw-links">
+                      {p.github && (
+                        <a href={p.github} target="_blank" rel="noopener noreferrer" className="lw-link" aria-label="GitHub">
+                          <FiGithub />
+                        </a>
+                      )}
+                      {p.demo && (
+                        <a href={p.demo} target="_blank" rel="noopener noreferrer" className="lw-link" aria-label="Demo">
+                          <FiExternalLink />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
-
-export default Projects;

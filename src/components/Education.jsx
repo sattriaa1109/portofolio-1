@@ -1,66 +1,115 @@
-// ============================================================
-// FILE: src/components/Education.jsx
-// FUNGSI: Menampilkan riwayat pendidikan dalam format timeline.
-// ============================================================
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  SiGo, SiNodedotjs, SiDart, SiPostgresql, SiDocker, SiGit,
+} from "react-icons/si";
+import { educationData, hardSkills, softSkills } from "../data/portfolioData";
+import TextReveal from "./TextReveal";
+import "../styles/Education.css";
 
-import { educationData } from "../data/portfolioData";
-import "../styles/components.css";
+gsap.registerPlugin(ScrollTrigger);
 
-function Education() {
+const ICON_MAP = {
+  SiGo:         <SiGo />,
+  SiNodedotjs:  <SiNodedotjs />,
+  SiDart:       <SiDart />,
+  SiPostgresql: <SiPostgresql />,
+  SiDocker:     <SiDocker />,
+  SiGit:        <SiGit />,
+};
+
+// Duplicate array for seamless infinite loop
+const doubled = [...hardSkills, ...hardSkills];
+
+// Soft skills split into two rows for opposite-direction marquees
+const softRow1 = [...softSkills, ...softSkills, ...softSkills];
+const softRow2 = [...softSkills, ...softSkills, ...softSkills];
+
+export default function Education() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Journey rows stagger in
+      gsap.utils.toArray(".journey-item").forEach((item, i) => {
+        gsap.from(item, {
+          opacity: 0,
+          x: -13,
+          duration: 0.5,
+          delay: i * 0.06,
+          ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 88%",
+            once: true,
+          },
+        });
+      });
+
+      // Skills section fade in
+      gsap.from(".skills-header", {
+        opacity: 0,
+        y: 21,
+        duration: 0.6,
+        ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        scrollTrigger: {
+          trigger: ".skills-section",
+          start: "top 85%",
+          once: true,
+        },
+      });
+    }, ref);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="education section" id="education">
-      <div className="container">
-        <h2 className="section-title">
-          Riwayat <span>Pendidikan</span>
-        </h2>
-        <p className="section-subtitle">jejak akademik saya</p>
-
-        {/* Timeline */}
-        <div className="education-timeline">
-          {educationData.map((edu) => (
-            <div
-              key={edu.id}
-              className={`edu-item ${edu.current ? "current" : ""}`}
-            >
-              {/* Titik pada garis timeline */}
-              <div className="edu-dot"></div>
-
-              {/* Kartu Pendidikan */}
-              <div className="edu-card">
-                <div className="edu-header">
-                  <div className="edu-school">{edu.school}</div>
-                  <span className="edu-year">{edu.year}</span>
-                </div>
-                <div className="edu-major">{edu.major}</div>
-                <p className="edu-desc">{edu.description}</p>
-
-                {/* Badge "Sedang Berjalan" untuk pendidikan terkini */}
-                {edu.current && (
-                  <div style={{ marginTop: "12px" }}>
-                    <span style={{
-                      display: "inline-flex", alignItems: "center", gap: "6px",
-                      padding: "4px 12px", background: "rgba(74, 222, 128, 0.1)",
-                      border: "1px solid rgba(74, 222, 128, 0.3)",
-                      borderRadius: "20px", fontSize: "0.75rem",
-                      color: "var(--accent-green)", fontFamily: "var(--font-mono)"
-                    }}>
-                      {/* Titik berkedip tanda aktif */}
-                      <span style={{
-                        width: "6px", height: "6px", borderRadius: "50%",
-                        background: "var(--accent-green)",
-                        animation: "pulse 1.5s infinite"
-                      }}></span>
-                      Sedang Berjalan
-                    </span>
-                  </div>
-                )}
-              </div>
+    <div ref={ref}>
+      {/* ── Journey / Education ── */}
+      <section className="journey" id="journey">
+        <div className="container">
+          <div className="journey-layout">
+            <div className="journey-left">
+              <div className="sec-label">Experience</div>
+              <h2 className="sec-heading">
+                <TextReveal text="My Learning Journey" tag="span" />
+              </h2>
+              <p>
+                Perjalanan akademik yang membentuk fondasi teknis saya sebagai
+                backend developer.
+              </p>
+              <a href="#contact" className="btn btn-dark">
+                Let's Talk
+              </a>
             </div>
-          ))}
+
+            <div className="journey-list">
+              {educationData.map((edu) => (
+                <div key={edu.id} className="journey-item">
+                  <div>
+                    <div className="ji-school">{edu.school}</div>
+                    <div className="ji-major">{edu.major}</div>
+                  </div>
+                  <div className="ji-desc">{edu.description}</div>
+                  <div>
+                    <div className="ji-year">{edu.year}</div>
+                    {edu.current ? (
+                      <div className="ji-badge">
+                        <span className="ji-badge-dot" />
+                        Active
+                      </div>
+                    ) : (
+                      <div className="ji-badge-past">Completed</div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+    </div>
   );
 }
-
-export default Education;

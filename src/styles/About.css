@@ -1,0 +1,216 @@
+/* ── About ── */
+.about {
+  padding: var(--sp-7) 0;
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+}
+
+/* 12-col: left=5, center=3, right=4 */
+.about-grid {
+  display: grid;
+  grid-template-columns: 5fr 3fr 4fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+.about-left .sec-label { margin-bottom: var(--sp-2); }
+.about-left .sec-heading { font-size: clamp(1.625rem, 2.2vw, 2.25rem); margin-bottom: var(--sp-4); }
+
+.about-bio {
+  font-family: var(--f-sans);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: var(--t3);
+  line-height: 1.7;
+  margin-bottom: var(--sp-4);
+  max-width: 420px;
+}
+.about-skills-list {
+  display: flex; flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-4);
+}
+
+/* Center */
+.about-center { text-align: center; padding-top: var(--sp-3); }
+.about-big-num {
+  display: block;
+  font-family: var(--f-serif);
+  font-size: clamp(56px, 7vw, 96px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--t1);
+}
+.about-big-label {
+  display: block;
+  font-family: var(--f-sans);
+  font-size: 0.5625rem;
+  font-weight: 400;
+  color: var(--t4);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: var(--sp-1);
+}
+.about-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--cream-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  margin-top: var(--sp-4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; color: var(--t5);
+  transform: rotate(2deg); /* Slight opposite tilt for asymmetry */
+  box-shadow: 0 var(--sp-2) var(--sp-4) rgba(26,26,26,0.06);
+}
+
+/* Right */
+.about-right {
+  display: flex; flex-direction: column;
+  gap: var(--sp-2);
+  padding-top: var(--sp-3);
+}
+.about-info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: var(--sp-3);
+  transition: border-color var(--t-fast) var(--ease);
+}
+.about-info-card:hover { border-color: var(--border-md); }
+.about-info-card-label {
+  font-family: var(--f-sans);
+  font-size: 0.5625rem; font-weight: 500;
+  color: var(--t4);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: var(--sp-1);
+}
+.about-info-card-val {
+  font-family: var(--f-sans);
+  font-size: 0.875rem; font-weight: 500;
+  color: var(--t1); line-height: 1.4;
+}
+.about-info-card-sub {
+  font-family: var(--f-sans);
+  font-size: 0.75rem; font-weight: 300;
+  color: var(--t3); margin-top: 3px; line-height: 1.4;
+}
+.about-soft-row {
+  display: flex; flex-wrap: wrap;
+  gap: var(--sp-1); margin-top: var(--sp-1);
+}
+.about-soft-item {
+  display: inline-flex; align-items: center;
+  gap: 5px;
+  padding: 4px var(--sp-2);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  font-family: var(--f-sans);
+  font-size: 0.6875rem; font-weight: 400;
+  color: var(--t2); line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .about-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+  .about-center { display: none; }
+  .about { padding: var(--sp-6) 0; }
+}
+
+
+/* ── Auto Marquee Tech Stack (Photos) ── */
+.about-tech-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: var(--sp-6);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.about-tech-track {
+  display: flex;
+  gap: var(--sp-4);
+  width: max-content;
+  animation: scroll-left 25s linear infinite;
+}
+.about-tech-track:hover {
+  animation-play-state: paused;
+}
+.about-tech-card {
+  width: 140px;
+  height: 140px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+  transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+.about-tech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 var(--sp-2) var(--sp-4) rgba(26,26,26,0.08);
+}
+.about-tech-photo {
+  font-size: 3.5rem; /* For react-icons acting as "photos" */
+  color: var(--t2);
+  transition: color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.about-tech-card:hover .about-tech-photo {
+  transform: scale(1.1);
+}
+.about-tech-name {
+  font-family: var(--f-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ── Auto Marquee Soft Skills (Text Only) ── */
+.about-soft-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: var(--sp-3) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+.about-soft-track {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  width: max-content;
+  animation: scroll-left 20s linear infinite;
+}
+.about-soft-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--f-serif);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-style: italic;
+  color: var(--t2);
+  white-space: nowrap;
+}
+.about-soft-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--t5);
+  border-radius: 50%;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .about-tech-card { width: 110px; height: 110px; }
+  .about-tech-photo { font-size: 2.5rem; }
+}

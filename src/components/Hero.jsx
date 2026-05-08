@@ -1,134 +1,159 @@
-// ============================================================
-// FILE: src/components/Hero.jsx
-// FUNGSI: Bagian pertama yang dilihat pengunjung. Berisi nama,
-//         role, bio singkat, CTA button, dan terminal window keren.
-// ============================================================
-
-import { FiGithub, FiLinkedin, FiMail, FiDownload } from "react-icons/fi";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { Link } from "react-scroll";
-import { profileData } from "../data/portfolioData";
+import { profileData, hardSkills, projectsData } from "../data/portfolioData";
 import "../styles/Hero.css";
 
-function Hero() {
+export default function Hero({ isLoaded }) {
+  const helloStrokeRef = useRef(null);
+  const helloFillRef = useRef(null);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.1 });
+
+      // Animate stroke outline drawing
+      tl.fromTo(
+        helloStrokeRef.current,
+        { strokeDasharray: 1500, strokeDashoffset: 1500 },
+        { 
+          strokeDashoffset: 0, 
+          duration: 2.5, 
+          ease: "cubic-bezier(0.7, 0, 0.3, 1)" 
+        }
+      );
+
+      // Fade in the solid fill color
+      tl.to(
+        helloFillRef.current,
+        { opacity: 1, duration: 1.2, ease: "power2.out" },
+        "-=0.8" // Start slightly before outline finishes
+      );
+    });
+
+    return () => ctx.revert();
+  }, [isLoaded]);
+
   return (
     <section className="hero" id="hero">
-      {/* Efek glow di background */}
-      <div className="hero-glow"></div>
-
-      <div className="hero-inner container">
-        {/* ===== KIRI: Konten Teks ===== */}
-        <div className="hero-content">
-          <p className="hero-greeting">👋 Halo, perkenalkan saya</p>
-
-          <h1 className="hero-name">{profileData.name}</h1>
-
-          <div className="hero-role">
-            <span className="role-text">{profileData.role}</span>
-            {/* Cursor berkedip */}
-            <span className="cursor"></span>
+      {/* Top bar — stats */}
+      <div className="hero-topbar">
+        <div className="hero-stats">
+          <div className="hero-stat-item">
+            <span className="hero-stat-num">+{hardSkills.length * 10}</span>
+            <span className="hero-stat-label">Projects Done</span>
           </div>
-
-          <p className="hero-bio">{profileData.bio}</p>
-
-          {/* Tombol CTA */}
-          <div className="hero-cta">
-            <Link to="projects" smooth duration={600} offset={-70}>
-              <button className="btn-primary">
-                Lihat Proyek Saya
-              </button>
-            </Link>
-            <Link to="contact" smooth duration={600} offset={-70}>
-              <button className="btn-outline">
-                Hubungi Saya
-              </button>
-            </Link>
+          <div className="hero-stat-item">
+            <span className="hero-stat-num">+{projectsData.length * 10}</span>
+            <span className="hero-stat-label">Happy Clients</span>
           </div>
+        </div>
+        <div className="hero-available">
+          <span className="hero-avail-dot" />
+          Available for work
+        </div>
+      </div>
 
-          {/* Ikon Sosial Media */}
-          <div className="hero-socials">
-            <a href={profileData.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <FiGithub />
-            </a>
-            <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <FiLinkedin />
-            </a>
-            <a href={`mailto:${profileData.email}`} aria-label="Email">
-              <FiMail />
-            </a>
+      {/* Main — 3 col */}
+      <div className="hero-main">
+        {/* Left */}
+        <div className="hero-left">
+          <p className="hero-tagline">Backend Developer</p>
+          <p className="hero-desc">{profileData.tagline}</p>
+          <div className="hero-actions">
+            <Link to="works" smooth duration={600} offset={-60}>
+              <button className="btn btn-dark">View Works</button>
+            </Link>
+            <Link to="contact" smooth duration={600} offset={-60}>
+              <button className="btn btn-outline">Contact Me</button>
+            </Link>
           </div>
         </div>
 
-        {/* ===== KANAN: Terminal Window ===== */}
-        <div className="hero-terminal">
-          <div className="terminal-window">
-            {/* Header terminal (titik merah, kuning, hijau) */}
-            <div className="terminal-header">
-              <div className="terminal-dot red"></div>
-              <div className="terminal-dot yellow"></div>
-              <div className="terminal-dot green"></div>
-              <span className="terminal-title">profile.go — zsh</span>
-            </div>
+        {/* Center — big name + photo */}
+        <div className="hero-center">
+          <div className="hero-hello-svg-wrap">
+            <svg 
+              viewBox="0 0 500 160" 
+              className="hero-hello-svg"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Ink bleed filter */}
+              <filter id="inkBleedHello" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+              </filter>
 
-            {/* Isi terminal */}
-            <div className="terminal-body">
-              <div className="t-line">
-                <span className="t-prompt">$</span>
-                <span className="t-cmd">cat developer.json</span>
-              </div>
-              <div className="t-blank"></div>
-              <div className="t-line"><span className="t-output t-key">{"{"}</span></div>
-              <div className="t-line">
-                <span className="t-output">
-                  &nbsp;&nbsp;<span className="t-key">"name"</span>: <span className="t-str">"{profileData.name}"</span>,
-                </span>
-              </div>
-              <div className="t-line">
-                <span className="t-output">
-                  &nbsp;&nbsp;<span className="t-key">"role"</span>: <span className="t-str">"{profileData.role}"</span>,
-                </span>
-              </div>
-              <div className="t-line">
-                <span className="t-output">
-                  &nbsp;&nbsp;<span className="t-key">"status"</span>: <span className="t-val">learning & building</span>,
-                </span>
-              </div>
-              <div className="t-line">
-                <span className="t-output">
-                  &nbsp;&nbsp;<span className="t-key">"stack"</span>: [
-                </span>
-              </div>
-              <div className="t-line">
-                <span className="t-output">
-                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">"Golang"</span>, <span className="t-str">"Node.js"</span>, <span className="t-str">"Dart"</span>
-                </span>
-              </div>
-              <div className="t-line">
-                <span className="t-output">&nbsp;&nbsp;],</span>
-              </div>
-              <div className="t-line">
-                <span className="t-output">
-                  &nbsp;&nbsp;<span className="t-key">"available"</span>: <span className="t-val">true</span>,
-                </span>
-              </div>
-              <div className="t-line">
-                <span className="t-output">
-                  &nbsp;&nbsp;<span className="t-key">"location"</span>: <span className="t-str">"{profileData.location}"</span>
-                </span>
-              </div>
-              <div className="t-line"><span className="t-output">{"}"}</span></div>
-              <div className="t-blank"></div>
-              <div className="t-line">
-                <span className="t-prompt">$</span>
-                <span className="t-cmd">
-                  <span className="cursor"></span>
-                </span>
-              </div>
-            </div>
+              {/* Stroke (Animated) */}
+              <text
+                ref={helloStrokeRef}
+                x="50%"
+                y="65%"
+                dominantBaseline="middle"
+                textAnchor="middle"
+                stroke="var(--charcoal)"
+                strokeWidth="1.5"
+                filter="url(#inkBleedHello)"
+                style={{
+                  fontFamily: "var(--f-serif)",
+                  fontSize: "140px",
+                  fontWeight: 900,
+                  letterSpacing: "-0.05em",
+                }}
+              >
+                Hello
+              </text>
+
+              {/* Fill (Fades in) */}
+              <text
+                ref={helloFillRef}
+                x="50%"
+                y="65%"
+                dominantBaseline="middle"
+                textAnchor="middle"
+                fill="var(--charcoal)"
+                opacity="0"
+                style={{
+                  fontFamily: "var(--f-serif)",
+                  fontSize: "140px",
+                  fontWeight: 900,
+                  letterSpacing: "-0.05em",
+                }}
+              >
+                Hello
+              </text>
+            </svg>
           </div>
+
+          <div className="hero-photo-wrap">
+            <div className="hero-photo-placeholder">SP</div>
+          </div>
+          <p className="hero-role-line">I'm a Backend Developer</p>
+        </div>
+
+        {/* Right */}
+        <div className="hero-right">
+          <p className="hero-location">{profileData.location}</p>
+          <p className="hero-name-small">{profileData.name}</p>
+          <div className="hero-scroll-hint">
+            <div className="hero-scroll-line" />
+            Scroll down
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="hero-bottom">
+        <span className="hero-bottom-left">© 2025 — {profileData.name}</span>
+        <div className="hero-bottom-right">
+          <a href={profileData.github} target="_blank" rel="noopener noreferrer" className="hero-social-link">GitHub</a>
+          <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer" className="hero-social-link">LinkedIn</a>
+          <a href={`mailto:${profileData.email}`} className="hero-social-link">Email</a>
         </div>
       </div>
     </section>
   );
 }
-
-export default Hero;

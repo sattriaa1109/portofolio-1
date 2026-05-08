@@ -1,96 +1,282 @@
-.education { background: var(--bg-secondary); }
- 
-.education-timeline {
-  position: relative;
-  padding-left: 32px;
+/* ── Journey ── */
+.journey {
+  padding: var(--sp-7) 0;
+  background: var(--cream);
+  border-top: 1px solid var(--border);
 }
- 
-/* Garis vertikal */
-.education-timeline::before {
-  content: '';
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  bottom: 8px;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-blue));
-  border-radius: 2px;
+.journey-layout {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: var(--sp-6);
+  align-items: start;
 }
- 
-.edu-item {
-  position: relative;
-  margin-bottom: 40px;
-  animation: fadeInLeft 0.6s ease forwards;
+.journey-left .sec-heading { font-size: clamp(1.625rem, 2.5vw, 2.5rem); margin-bottom: var(--sp-3); }
+.journey-left p {
+  font-family: var(--f-sans);
+  font-size: 0.875rem; font-weight: 300;
+  color: var(--t3); line-height: 1.7;
+  margin-bottom: var(--sp-4);
 }
- 
-.edu-item:last-child { margin-bottom: 0; }
- 
-/* Titik di timeline */
-.edu-dot {
-  position: absolute;
-  left: -28px;
-  top: 16px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--bg-secondary);
-  border: 2px solid var(--accent-cyan);
-  transition: var(--transition);
+.journey-list { display: flex; flex-direction: column; }
+.journey-item {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr auto;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left var(--t-base) var(--ease);
 }
- 
-.edu-item.current .edu-dot {
-  background: var(--accent-cyan);
-  box-shadow: 0 0 12px var(--accent-cyan);
+.journey-item:first-child { border-top: 1px solid var(--border); }
+.journey-item:hover { padding-left: var(--sp-2); }
+.ji-school {
+  font-family: var(--f-serif);
+  font-size: 1rem; font-weight: 600;
+  line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--t1); margin-bottom: 3px;
 }
- 
-.edu-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 24px;
-  transition: var(--transition);
+.ji-major {
+  font-family: var(--f-sans);
+  font-size: 0.75rem; font-weight: 300;
+  color: var(--t3);
 }
- 
-.edu-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-card);
-  transform: translateX(4px);
+.ji-desc {
+  font-family: var(--f-sans);
+  font-size: 0.8125rem; font-weight: 300;
+  color: var(--t3); line-height: 1.5;
 }
- 
-.edu-header {
-  display: flex;
-  align-items: flex-start;
+.ji-year {
+  font-family: var(--f-sans);
+  font-size: 0.625rem; font-weight: 400;
+  color: var(--t4); letter-spacing: 0.08em;
+  margin-bottom: var(--sp-1);
+}
+.ji-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px var(--sp-2);
+  background: rgba(34,197,94,0.07);
+  border: 1px solid rgba(34,197,94,0.18);
+  border-radius: 100px;
+  font-size: 0.5625rem; font-family: var(--f-sans);
+  color: #16a34a; white-space: nowrap;
+}
+.ji-badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 1.5s var(--ease) infinite;
+}
+.ji-badge-past {
+  display: inline-flex;
+  padding: 3px var(--sp-2);
+  background: var(--cream-2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.5625rem; font-family: var(--f-sans);
+  color: var(--t4); white-space: nowrap;
+}
+
+/* ── Skills Section ── */
+.skills-section {
+  padding: var(--sp-7) 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.skills-header {
+  display: flex; align-items: flex-end;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
+  margin-bottom: var(--sp-5); gap: var(--sp-4);
+  padding: 0 var(--sp-6);
+  max-width: 1440px;
+  margin-left: auto; margin-right: auto;
 }
- 
-.edu-school {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
+.skills-header p {
+  font-family: var(--f-sans);
+  font-size: 0.875rem; font-weight: 300;
+  color: var(--t3); line-height: 1.6;
+  max-width: 320px;
 }
- 
-.edu-year {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--accent-cyan);
-  background: rgba(34, 211, 238, 0.1);
-  padding: 3px 10px;
-  border-radius: 20px;
+
+/* ── Tech Stack Marquee (cards with icon image) ── */
+.tech-marquee-wrap {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: var(--sp-5);
+  /* Fade edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.tech-marquee-track {
+  display: flex;
+  gap: var(--sp-3);
+  width: max-content;
+  /* Infinite scroll left — duration controls speed */
+  animation: marquee-left 28s linear infinite;
+}
+.tech-marquee-track:hover { animation-play-state: paused; }
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Individual tech card */
+.tech-card {
+  flex-shrink: 0;
+  width: 160px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  transition:
+    border-color var(--t-fast) var(--ease),
+    transform    var(--t-fast) var(--ease),
+    box-shadow   var(--t-fast) var(--ease);
+  cursor: default;
+  user-select: none;
+}
+.tech-card:hover {
+  border-color: var(--border-md);
+  transform: translateY(-3px);
+  box-shadow: 0 var(--sp-1) var(--sp-3) rgba(26,26,26,0.07);
+}
+
+/* Icon wrapper — fixed square, centered */
+.tech-card-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.tech-card-name {
+  font-family: var(--f-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--t1);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.tech-card-desc {
+  font-family: var(--f-sans);
+  font-size: 0.5625rem;
+  font-weight: 300;
+  color: var(--t4);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.tech-card-bar {
+  width: 100%;
+  height: 2px;
+  background: var(--cream-3);
+  overflow: hidden;
+  margin-top: auto;
+}
+.tech-card-bar-fill {
+  height: 100%;
+  border-radius: 1px;
+}
+
+/* ── Soft Skills Marquee (text only) ── */
+.soft-marquee-wrap {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-3) 0;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.soft-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  width: max-content;
+  animation: marquee-left 20s linear infinite;
+}
+/* Second row goes right */
+.soft-marquee-track.reverse {
+  animation: marquee-right 22s linear infinite;
+  margin-top: var(--sp-2);
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.soft-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-family: var(--f-serif);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--t2);
   white-space: nowrap;
+  letter-spacing: -0.01em;
 }
- 
-.edu-major {
-  color: var(--accent-blue);
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 8px;
+
+.soft-marquee-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--t5);
+  flex-shrink: 0;
 }
- 
-.edu-desc {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  line-height: 1.7;
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .skills-header { padding: 0 var(--sp-5); }
+}
+@media (max-width: 900px) {
+  .journey-layout { grid-template-columns: 1fr; gap: var(--sp-4); }
+  .journey-item { grid-template-columns: 1fr 1fr; }
+  .ji-desc { display: none; }
+  .journey, .skills-section { padding: var(--sp-6) 0; }
+  .skills-header { padding: 0 var(--sp-3); }
+  .tech-card { width: 140px; }
+}
+@media (max-width: 600px) {
+  .journey-item { grid-template-columns: 1fr; gap: var(--sp-1); }
+  .tech-card { width: 120px; }
+  .tech-card-icon { width: 44px; height: 44px; font-size: 1.75rem; }
 }

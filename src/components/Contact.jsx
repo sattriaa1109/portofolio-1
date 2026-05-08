@@ -1,187 +1,144 @@
-// ============================================================
-// FILE: src/components/Contact.jsx
-// FUNGSI: Formulir kontak sederhana + info kontak.
-// ============================================================
-
 import { useState } from "react";
 import { FiMail, FiGithub, FiLinkedin, FiMapPin, FiSend } from "react-icons/fi";
+import { Link } from "react-scroll";
 import { profileData } from "../data/portfolioData";
-import "../styles/Contacts.css"; // Fixed import
+import "../styles/Contacts.css";
 
-function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+export default function Contact() {
+  const [form,   setForm]   = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("idle");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const onChange = e => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  const onSubmit = async e => {
     e.preventDefault();
     setStatus("sending");
     try {
-      const response = await fetch("https://formspree.io/f/mjgpdrwe", {
+      const res = await fetch("https://formspree.io/f/mjgpdrwe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(form),
       });
-      if (response.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
+      if (res.ok) { setStatus("success"); setForm({ name: "", email: "", message: "" }); }
+      else setStatus("error");
+    } catch { setStatus("error"); }
   };
 
   return (
-    <section className="contact section" id="contact">
-      {/* Decorative Background Elements */}
-      <div className="contact-blob blob-1"></div>
-      <div className="contact-blob blob-2"></div>
-      
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
-        <div className="contact-header animate-fadeInUp">
-          <h2 className="section-title">
-            Mari berkolaborasi <span>Bersama</span>
-          </h2>
-          <p className="section-subtitle">jangan ragu untuk menyapa</p>
+    <>
+      {/* ── CTA Banner ── */}
+      <div className="cta-banner">
+        <div className="container">
+          <div className="cta-inner">
+            <div className="cta-text">
+              <div className="cta-eyebrow">✦ Limited Slots</div>
+              <h2 className="cta-heading">
+                Got a Vision? Let's Bring it to Life!
+                <em> — Let's work together.</em>
+              </h2>
+            </div>
+            <div className="cta-actions">
+              <a href={`mailto:${profileData.email}`} className="btn btn-outline-white">
+                Send Email
+              </a>
+              <Link to="contact" smooth duration={600} offset={-60}>
+                <button className="btn btn-dark" style={{ background: "#fff", color: "#111" }}>
+                  Book a Call
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div className="contact-inner">
-          {/* ===== Kiri: Info Kontak ===== */}
-          <div className="contact-info animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
-            <div className="info-card">
-              <h3>Mari Terhubung!</h3>
-              <p>
-                Saya terbuka untuk peluang kerja sama, diskusi teknis,
-                atau sekadar ngobrol seputar teknologi. Jangan ragu untuk
-                menghubungi saya melalui form di samping atau kontak di bawah.
+      {/* ── Contact Form ── */}
+      <section className="contact" id="contact">
+        <div className="container">
+          <div className="contact-layout">
+            {/* Info */}
+            <div className="contact-info">
+              <div className="sec-label">Contact</div>
+              <h2 className="sec-heading">Let's Work Together</h2>
+              <p className="contact-info-desc">
+                Terbuka untuk kolaborasi, proyek freelance, atau sekadar diskusi teknis. Jangan ragu untuk menghubungi saya.
               </p>
 
-              <div className="contact-detail">
-                <a href={`mailto:${profileData.email}`} className="contact-detail-item">
-                  <span className="contact-detail-icon"><FiMail /></span>
-                  <div className="contact-detail-text">
-                     <span className="contact-label">Email</span>
-                     <span className="contact-value">{profileData.email}</span>
+              <div className="contact-links">
+                <a href={`mailto:${profileData.email}`} className="contact-link-row">
+                  <span className="clr-icon"><FiMail /></span>
+                  <div className="clr-text">
+                    <span className="clr-label">Email</span>
+                    <span className="clr-value">{profileData.email}</span>
                   </div>
                 </a>
-                <a href={profileData.github} target="_blank" rel="noopener noreferrer" className="contact-detail-item">
-                  <span className="contact-detail-icon"><FiGithub /></span>
-                  <div className="contact-detail-text">
-                     <span className="contact-label">GitHub</span>
-                     <span className="contact-value">Jelajahi Projek Saya</span>
+                <a href={profileData.github} target="_blank" rel="noopener noreferrer" className="contact-link-row">
+                  <span className="clr-icon"><FiGithub /></span>
+                  <div className="clr-text">
+                    <span className="clr-label">GitHub</span>
+                    <span className="clr-value">Jelajahi Proyek Saya</span>
                   </div>
                 </a>
-                <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer" className="contact-detail-item">
-                  <span className="contact-detail-icon"><FiLinkedin /></span>
-                  <div className="contact-detail-text">
-                     <span className="contact-label">LinkedIn</span>
-                     <span className="contact-value">Mari Terhubung Profesional</span>
+                <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer" className="contact-link-row">
+                  <span className="clr-icon"><FiLinkedin /></span>
+                  <div className="clr-text">
+                    <span className="clr-label">LinkedIn</span>
+                    <span className="clr-value">Terhubung Profesional</span>
                   </div>
                 </a>
-                <span className="contact-detail-item">
-                  <span className="contact-detail-icon"><FiMapPin /></span>
-                  <div className="contact-detail-text">
-                     <span className="contact-label">Lokasi</span>
-                     <span className="contact-value">{profileData.location}</span>
+                <span className="contact-link-row">
+                  <span className="clr-icon"><FiMapPin /></span>
+                  <div className="clr-text">
+                    <span className="clr-label">Lokasi</span>
+                    <span className="clr-value">{profileData.location}</span>
                   </div>
                 </span>
               </div>
             </div>
-          </div>
 
-          {/* ===== Kanan: Form ===== */}
-          <div className="contact-form-wrapper animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
-            {status === "success" ? (
-              <div className="form-success">
-                <div className="success-icon-wrapper">
-                  <span className="success-icon">✨</span>
+            {/* Form */}
+            <div className="contact-form-wrap">
+              {status === "success" ? (
+                <div className="form-success">
+                  <div className="success-icon">✨</div>
+                  <h4>Pesan Terkirim!</h4>
+                  <p>Terima kasih! Saya akan segera membalas pesan Anda.</p>
+                  <button className="btn btn-dark" onClick={() => setStatus("idle")}>Kirim Lagi</button>
                 </div>
-                <h4>Pesan Terkirim!</h4>
-                <p>Terima kasih telah menghubungi, saya akan segera membalas pesan Anda.</p>
-                <button className="btn-outline" onClick={() => setStatus("idle")}>Kirim Pesan Lainnya</button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="contact-form">
-                <div className="form-row">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder=" "
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                    />
-                    <label htmlFor="name">Nama Lengkap</label>
-                    <div className="input-focus-border"></div>
+              ) : (
+                <form className="form" onSubmit={onSubmit}>
+                  <div className="form-row">
+                    <div className="form-field">
+                      <label htmlFor="name">Nama</label>
+                      <input id="name" name="name" type="text" placeholder="John Doe"
+                        value={form.name} onChange={onChange} required />
+                    </div>
+                    <div className="form-field">
+                      <label htmlFor="email">Email</label>
+                      <input id="email" name="email" type="email" placeholder="john@example.com"
+                        value={form.email} onChange={onChange} required />
+                    </div>
                   </div>
-
-                  <div className="form-group">
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder=" "
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                    <label htmlFor="email">Alamat Email</label>
-                    <div className="input-focus-border"></div>
+                  <div className="form-field">
+                    <label htmlFor="message">Pesan</label>
+                    <textarea id="message" name="message" rows={5}
+                      placeholder="Ceritakan proyek atau ide Anda..."
+                      value={form.message} onChange={onChange} required />
                   </div>
-                </div>
-
-                <div className="form-group textarea-group">
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    placeholder=" "
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                  />
-                  <label htmlFor="message">Tuliskan pesan Anda di sini...</label>
-                  <div className="input-focus-border"></div>
-                </div>
-
-                {status === "error" && (
-                  <div className="form-error">
-                    <p>Ups! Terjadi kesalahan. Coba lagi atau email langsung.</p>
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className={`btn-primary form-submit ${status === "sending" ? "sending" : ""}`}
-                  disabled={status === "sending"}
-                >
-                  {status === "sending" ? (
-                      <span className="spinner"></span>
-                  ) : (
-                    <>
-                      <span>Kirim Pesan</span>
-                      <FiSend className="send-icon" />
-                    </>
+                  {status === "error" && (
+                    <div className="form-error-msg">Gagal mengirim. Coba lagi atau email langsung.</div>
                   )}
-                </button>
-              </form>
-            )}
+                  <button type="submit" className="btn btn-dark form-submit" disabled={status === "sending"}>
+                    {status === "sending"
+                      ? <span className="spinner" />
+                      : <><span>Kirim Pesan</span><FiSend /></>
+                    }
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
-
-export default Contact;
