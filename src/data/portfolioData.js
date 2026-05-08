@@ -1,8 +1,4 @@
-// ============================================================
-// FILE: src/data/portfolioData.js
-// FUNGSI: Menyimpan semua data konten portofolio di satu tempat.
-//         Kalau mau update konten, cukup edit file ini saja!
-// ============================================================
+
 
 export const profileData = {
   name: "Satria Pamungkas",
@@ -101,9 +97,9 @@ export const projectsData = [
     id: 1,
     title: "REST API dengan Golang",
     description:
-      "Membangun RESTful API untuk sistem manajemen tugas (To-Do App) menggunakan Golang dan framework Gin. Dilengkapi autentikasi JWT dan koneksi ke PostgreSQL.",
+      "Membangun RESTful API untuk sistem Sewa Mobil (Rent Car) menggunakan Golang dan framework Gin. Dilengkapi autentikasi JWT dan koneksi ke PostgreSQL.",
     tech: ["Golang", "Gin", "PostgreSQL", "JWT"],
-    github: "https://github.com/usernamekamu/todo-api-golang",
+    github: "https://github.com/sattriaa1109/golangbe.git",
     demo: null,
     color: "#00ACD7",
   },
@@ -121,9 +117,9 @@ export const projectsData = [
     id: 3,
     title: "Aplikasi Mobile dengan Flutter/Dart",
     description:
-      "Aplikasi catatan harian (diary app) yang dibuat menggunakan Flutter dan Dart. Memiliki fitur tambah, edit, hapus catatan, serta penyimpanan lokal menggunakan Hive.",
+      "Aplikasi Sewa Mobil (Rent Car) yang dibuat menggunakan Flutter dan Golang. Memiliki fitur tambah, edit, hapus catatan, serta penyimpanan lokal menggunakan Hive.",
     tech: ["Dart", "Flutter", "Hive", "Provider"],
-    github: "https://github.com/usernamekamu/diary-app-flutter",
+    github: "https://github.com/sattriaa1109/rentcar.git",
     demo: null,
     color: "#0175C2",
   },
