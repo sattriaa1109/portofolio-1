@@ -69,10 +69,18 @@ export default function Projects() {
               {/* Image */}
               <div className="project-img-col">
                 <div className="project-img-wrap">
-                  <img
-                    src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
-                    alt={p.title}
-                  />
+                  {p.comingSoon ? (
+                    <div className="project-coming-soon">
+                      <span className="project-coming-soon-dot" />
+                      <span className="project-coming-soon-text">On Development</span>
+                      <span className="project-coming-soon-sub">{p.title}</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
+                      alt={p.title}
+                    />
+                  )}
                   <span className="project-num">{String(i + 1).padStart(2, "0")}</span>
                 </div>
               </div>
@@ -119,10 +127,17 @@ export default function Projects() {
             {projectsData.map((p, i) => (
               <article key={p.id} className="lw-card">
                 <div className="lw-img-wrap">
-                  <img
-                    src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
-                    alt={p.title}
-                  />
+                  {p.comingSoon ? (
+                    <div className="lw-coming-soon">
+                      <span className="project-coming-soon-dot" />
+                      <span className="project-coming-soon-text">On Development</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
+                      alt={p.title}
+                    />
+                  )}
                 </div>
                 <div className="lw-body">
                   <div className="lw-tags">

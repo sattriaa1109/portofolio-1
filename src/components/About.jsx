@@ -35,7 +35,7 @@ export default function About() {
           <div className="about-center">
             <span className="about-big-num">80%</span>
             <span className="about-big-label">Avg. Skill Level</span>
-            <div className="about-photo-placeholder">👨‍💻</div>
+            <div className="about-photo-placeholder"><img src="src/assets/photos.jpeg" alt="" /></div>
           </div>
 
           {/* Right — info cards */}

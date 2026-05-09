@@ -5,15 +5,6 @@ import SplitType from 'split-type';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─────────────────────────────────────────────
-//  TextReveal — word-mask slide-up
-//  • Uses SplitType to split into words/lines
-//  • Each word slides up from a clipped mask
-//  • Stagger: 0.08s per word
-//  • Easing: cubic-bezier(0.25, 0.1, 0.25, 1)
-//  • Triggered by ScrollTrigger (once)
-//  • delay prop: seconds before animation starts
-// ─────────────────────────────────────────────
 export default function TextReveal({ text, tag: Tag = 'span', className = '', delay = 0, style = {} }) {
   const elRef = useRef(null);
 

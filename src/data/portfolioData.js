@@ -63,12 +63,12 @@ export const hardSkills = [
 ];
 
 export const softSkills = [
-  { id: 1, name: "Problem Solving", icon: "🧩" },
-  { id: 2, name: "Kerja Tim", icon: "🤝" },
-  { id: 3, name: "Manajemen Waktu", icon: "⏰" },
-  { id: 4, name: "Cepat Belajar", icon: "📚" },
-  { id: 5, name: "Komunikasi", icon: "💬" },
-  { id: 6, name: "Analitis", icon: "🔍" },
+  { id: 1, name: "Problem Solving",  },
+  { id: 2, name: "Kerja Tim", },
+  { id: 3, name: "Manajemen Waktu", },
+  { id: 4, name: "Cepat Belajar", },
+  { id: 5, name: "Komunikasi", },
+  { id: 6, name: "Analitis", },
 ];
 
 export const educationData = [
@@ -95,23 +95,27 @@ export const educationData = [
 export const projectsData = [
   {
     id: 1,
-    title: "REST API dengan Golang",
+    title: "Backend dengan Golang (Sewa Mobil)",
     description:
       "Membangun RESTful API untuk sistem Sewa Mobil (Rent Car) menggunakan Golang dan framework Gin. Dilengkapi autentikasi JWT dan koneksi ke PostgreSQL.",
     tech: ["Golang", "Gin", "PostgreSQL", "JWT"],
     github: "https://github.com/sattriaa1109/golangbe.git",
     demo: null,
     color: "#00ACD7",
+    comingSoon: true,
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=900&auto=format&fit=crop",
   },
   {
     id: 2,
-    title: "Backend Node.js + Express",
+    title: "Backend dengan Golang (To-Do)",
     description:
-      "API backend untuk aplikasi e-commerce sederhana menggunakan Node.js dan Express.js. Fitur meliputi autentikasi user, manajemen produk, dan keranjang belanja.",
-    tech: ["Node.js", "Express.js", "MongoDB", "JWT"],
-    github: "https://github.com/usernamekamu/ecommerce-api-node",
+      "Saya sedang mengembangkan API backend untuk aplikasi To-Do dengan memanfaatkan keunggulan bahasa pemrograman Go agar sistem yang dihasilkan memiliki performa yang tinggi, responsif, dan manajemen data yang sangat efisien.",
+    tech: ["Golang", "Gin", "PostgreSQL"],
+    github: "https://github.com/sattriaa1109/todo-app.git",
     demo: null,
     color: "#339933",
+    comingSoon: true,
+    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=900&auto=format&fit=crop",
   },
   {
     id: 3,
@@ -122,6 +126,8 @@ export const projectsData = [
     github: "https://github.com/sattriaa1109/rentcar.git",
     demo: null,
     color: "#0175C2",
+    comingSoon: true,
+    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=900&auto=format&fit=crop",
   },
   {
     id: 4,
@@ -131,6 +137,7 @@ export const projectsData = [
     github: "https://github.com/sattriaa1109/waktu-sholat",
     demo: "https://waktu-sholat-blue.vercel.app/",
     color: "#22d3ee",
+    comingSoon: false,
     image: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=2076&auto=format&fit=crop",
   },
 ];

@@ -114,7 +114,88 @@
 }
 .project-link:hover { border-color: var(--t1); color: var(--t1); }
 
-/* ── Latest Works grid ── */
+/* Coming Soon placeholder — replaces image */
+.project-coming-soon {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  background: var(--cream-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+}
+
+.lw-coming-soon {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--cream-2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+}
+
+.project-coming-soon-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--t4);
+  animation: pulse 2s var(--ease) infinite;
+}
+
+.project-coming-soon-text {
+  font-family: var(--f-serif);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--t2);
+  letter-spacing: -0.02em;
+}
+
+.project-coming-soon-sub {
+  font-family: var(--f-sans);
+  font-size: 0.625rem;
+  font-weight: 400;
+  color: var(--t4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Coming Soon badge */
+.coming-soon-badge {
+  position: absolute;
+  top: var(--sp-3);
+  left: var(--sp-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 5px var(--sp-2);
+  background: rgba(245, 244, 239, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-md);
+  font-family: var(--f-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--t2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.coming-soon-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--t4);
+  flex-shrink: 0;
+  animation: pulse 2s var(--ease) infinite;
+}
 .latest-section {
   padding: var(--sp-7) 0;
   background: var(--white);

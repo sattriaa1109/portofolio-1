@@ -42,12 +42,12 @@ export default function Hero({ isLoaded }) {
       <div className="hero-topbar">
         <div className="hero-stats">
           <div className="hero-stat-item">
-            <span className="hero-stat-num">+{hardSkills.length * 10}</span>
+            <span className="hero-stat-num">+{hardSkills.length * 2}</span>
             <span className="hero-stat-label">Projects Done</span>
           </div>
           <div className="hero-stat-item">
-            <span className="hero-stat-num">+{projectsData.length * 10}</span>
-            <span className="hero-stat-label">Happy Clients</span>
+            {/* <span className="hero-stat-num">+{projectsData.length}</span>
+            <span className="hero-stat-label">Personal Project Done</span> */}
           </div>
         </div>
         <div className="hero-available">
@@ -129,7 +129,16 @@ export default function Hero({ isLoaded }) {
           </div>
 
           <div className="hero-photo-wrap">
-            <div className="hero-photo-placeholder">SP</div>
+            <img
+              src="/src/assets/photo.jpg"
+              alt={profileData.name}
+              className="hero-photo"
+              onError={e => {
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.nextSibling.style.display = 'flex';
+              }}
+            />
+            <div className="hero-photo-placeholder" style={{ display: 'none' }}>SP</div>
           </div>
           <p className="hero-role-line">I'm a Backend Developer</p>
         </div>

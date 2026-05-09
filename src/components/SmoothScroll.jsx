@@ -5,15 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─────────────────────────────────────────────
-//  Lenis Smooth Scroll — locked to GSAP ticker
-//  • Uses gsap.ticker instead of rAF loop
-//    → guarantees 60fps sync with ScrollTrigger
-//  • lagSmoothing(0) prevents GSAP from
-//    throttling on background tabs (jank source)
-//  • easing: custom cubic-bezier (0.25,0.1,0.25,1)
-//    mapped to a JS function for Lenis
-// ─────────────────────────────────────────────
 export default function SmoothScroll({ children }) {
   const lenisRef = useRef(null);
 
