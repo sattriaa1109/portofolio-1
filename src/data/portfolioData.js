@@ -76,7 +76,7 @@ export const educationData = [
     id: 1,
     school: "SMK Wikrama Bogr",
     major: "Rekayasa Perangkat Lunak (RPL)",
-    year: "2023 – Sekarang",
+    year: "2024 – Sekarang",
     description:
       "Mempelajari dasar-dasar pemrograman, web development, basis data, dan praktikum pengembangan perangkat lunak secara menyeluruh.",
     current: true,
@@ -85,7 +85,7 @@ export const educationData = [
     id: 2,
     school: "SMP Megamendung 1",
     major: "Ilmu Pengetahuan Umum",
-    year: "2020 – 2023",
+    year: "2021 – 2024",
     description:
       "Lulus dengan predikat baik. Mulai tertarik dengan dunia komputer dan teknologi.",
     current: false,

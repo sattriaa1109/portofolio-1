@@ -66,8 +66,8 @@ export default function Projects() {
 
           {projectsData.map((p, i) => (
             <div key={p.id} className={`project-row ${i % 2 === 0 ? "odd" : "even"}`}>
-              {/* Image */}
-              <div className="project-img-col">
+              {/* Image — always order 1 on mobile */}
+              <div className="project-img-col" style={{ order: 1 }}>
                 <div className="project-img-wrap">
                   {p.comingSoon ? (
                     <div className="project-coming-soon">
@@ -85,8 +85,8 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Text */}
-              <div className="project-text-col">
+              {/* Text — always order 2 on mobile */}
+              <div className="project-text-col" style={{ order: 2 }}>
                 <div className="project-index">Project {String(i + 1).padStart(2, "0")}</div>
                 <h3 className="project-title">{p.title}</h3>
                 <p className="project-desc">{p.description}</p>

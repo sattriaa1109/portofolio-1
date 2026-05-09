@@ -266,19 +266,96 @@
 @media (max-width: 1280px) {
   .hero-topbar, .hero-main, .hero-bottom { padding-left: var(--sp-5); padding-right: var(--sp-5); }
 }
+
 @media (max-width: 900px) {
   .hero-main {
     grid-template-columns: 1fr;
-    padding-left: var(--sp-3); padding-right: var(--sp-3);
-    text-align: center; gap: var(--sp-4);
+    padding-left: var(--sp-3);
+    padding-right: var(--sp-3);
+    text-align: center;
+    gap: var(--sp-4);
   }
+
+  /* Foto naik ke atas */
   .hero-center { order: -1; padding-top: var(--sp-3); }
-  .hero-photo-wrap { width: clamp(160px, 55vw, 240px); height: clamp(259px, 89vw, 388px); }
-  .hero-left { padding-bottom: var(--sp-4); }
-  .hero-left .hero-desc { max-width: 100%; }
-  .hero-left .hero-actions { justify-content: center; }
-  .hero-right { text-align: center; padding-bottom: var(--sp-4); }
-  .hero-right .hero-scroll-hint { justify-content: center; }
-  .hero-topbar { padding: var(--sp-3) var(--sp-3) 0; flex-wrap: wrap; gap: var(--sp-2); }
-  .hero-bottom { padding: var(--sp-2) var(--sp-3); flex-wrap: wrap; gap: var(--sp-1); }
+
+  /* Foto tetap miring, ukuran proporsional */
+  .hero-photo-wrap {
+    width: clamp(160px, 52vw, 240px);
+    aspect-ratio: 3 / 4;
+    height: auto;
+    transform: rotate(-2deg); /* tetap miring */
+    margin: 0 auto var(--sp-2);
+  }
+
+  /* Teks kiri center */
+  .hero-left {
+    padding-bottom: var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-left .hero-desc { max-width: 320px; }
+  .hero-left .hero-tagline { text-align: center; }
+
+  /* Buttons center & full width */
+  .hero-actions {
+    justify-content: center;
+    width: 100%;
+    max-width: 320px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-cv-btn {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Sembunyikan kolom kanan — info redundant di mobile */
+  .hero-right { display: none; }
+
+  .hero-topbar {
+    padding: var(--sp-2) var(--sp-3) 0;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+  .hero-bottom {
+    padding: var(--sp-2) var(--sp-3);
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    justify-content: center;
+  }
+  .hero-bottom-left { width: 100%; text-align: center; }
+  .hero-bottom-right { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  /* Buttons stack vertikal */
+  .hero-actions {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-cv-btn { max-width: 280px; }
+
+  /* Hello SVG lebih kecil */
+  .hero-hello-svg-wrap { max-width: 260px; }
+
+  /* Foto sedikit lebih kecil */
+  .hero-photo-wrap {
+    width: clamp(130px, 46vw, 180px);
+    transform: rotate(-2deg);
+  }
+
+  /* Sembunyikan copyright di footer bar */
+  .hero-bottom-left { display: none; }
+  .hero-bottom-right { justify-content: center; gap: var(--sp-4); }
 }

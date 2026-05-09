@@ -161,11 +161,14 @@ a.contact-link-row { cursor: pointer; }
 
 @media (max-width: 900px) {
   .cta-inner { flex-direction: column; text-align: center; }
-  .cta-actions { justify-content: center; }
+  .cta-actions { justify-content: center; flex-wrap: wrap; }
   .contact-layout { grid-template-columns: 1fr; gap: var(--sp-4); }
   .contact, .cta-banner { padding: var(--sp-6) 0; }
 }
 @media (max-width: 480px) {
   .form-row { grid-template-columns: 1fr; }
   .contact-form-wrap { padding: var(--sp-3); }
+  .cta-heading { font-size: 1.25rem; }
+  .cta-actions { flex-direction: column; align-items: stretch; }
+  .cta-actions .btn { width: 100%; justify-content: center; }
 }
