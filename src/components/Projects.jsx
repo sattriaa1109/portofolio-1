@@ -114,64 +114,6 @@ export default function Projects() {
       </section>
 
       {/* ── Latest Works grid ── */}
-      <section className="latest-section" id="latest-works">
-        <div className="container">
-          <div className="latest-header">
-            <div className="sec-label" style={{ justifyContent: "center" }}>Projects</div>
-            <h2 className="sec-heading" style={{ textAlign: "center" }}>
-              <TextReveal text="Latest Works" tag="span" />
-            </h2>
-          </div>
-
-          <div className="latest-grid">
-            {projectsData.map((p, i) => (
-              <article key={p.id} className="lw-card">
-                <div className="lw-img-wrap">
-                  {p.comingSoon ? (
-                    <div className="lw-coming-soon">
-                      <span className="project-coming-soon-dot" />
-                      <span className="project-coming-soon-text">On Development</span>
-                    </div>
-                  ) : (
-                    <img
-                      src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
-                      alt={p.title}
-                    />
-                  )}
-                </div>
-                <div className="lw-body">
-                  <div className="lw-tags">
-                    {p.tech.slice(0, 2).map(t => (
-                      <span key={t} className="pill">{t}</span>
-                    ))}
-                  </div>
-                  <h3 className="lw-title">{p.title}</h3>
-                  <p className="lw-desc">{p.description}</p>
-                  <div className="lw-footer">
-                    <div className="lw-tags">
-                      {p.tech.slice(2).map(t => (
-                        <span key={t} className="pill">{t}</span>
-                      ))}
-                    </div>
-                    <div className="lw-links">
-                      {p.github && (
-                        <a href={p.github} target="_blank" rel="noopener noreferrer" className="lw-link" aria-label="GitHub">
-                          <FiGithub />
-                        </a>
-                      )}
-                      {p.demo && (
-                        <a href={p.demo} target="_blank" rel="noopener noreferrer" className="lw-link" aria-label="Demo">
-                          <FiExternalLink />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
