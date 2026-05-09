@@ -305,15 +305,20 @@
     max-width: 320px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
   }
   .hero-actions .btn {
     width: 100%;
     justify-content: center;
+    padding: var(--sp-2) var(--sp-2);
+    font-size: 0.8125rem;
   }
   .hero-cv-btn {
     max-width: 320px;
     width: 100%;
     margin: 0 auto;
+    padding: var(--sp-2) var(--sp-2);
+    font-size: 0.8125rem;
   }
 
   /* Sembunyikan kolom kanan — info redundant di mobile */
