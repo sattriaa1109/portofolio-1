@@ -4,11 +4,12 @@ import { profileData } from "../data/portfolioData";
 import "../styles/Navbar.css";
 
 const LINKS = [
-  { label: "Home",      to: "hero" },
-  { label: "About",     to: "about" },
-  { label: "Works",     to: "works" },
-  { label: "Journey",   to: "journey" },
-  { label: "Contact",   to: "contact" },
+  { label: "Home",        to: "hero" },
+  { label: "About",       to: "about" },
+  { label: "Works",       to: "works" },
+  { label: "Journey",     to: "journey" },
+  { label: "Certificate", to: "certificate" },
+  { label: "Contact",     to: "contact" },
 ];
 
 export default function Navbar() {

@@ -5,6 +5,7 @@ import About      from "./components/About";
 import Projects   from "./components/Projects";
 import Education  from "./components/Education";
 import Contact    from "./components/Contact";
+import Certificate from "./components/Certificate";
 import Preloader  from "./components/Preloader";
 import SmoothScroll from "./components/SmoothScroll";
 import { profileData } from "./data/portfolioData";
@@ -26,6 +27,7 @@ export default function App() {
             <About />
             <Projects />
             <Education />
+            <Certificate />
             <Contact />
           </main>
 

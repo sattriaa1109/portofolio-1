@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Link } from "react-scroll";
 import { profileData, hardSkills, projectsData } from "../data/portfolioData";
+import { cvLink } from "../data/certificateData";
+import { FiDownload } from "react-icons/fi";
+import photoHero from "../assets/photo.jpg";
 import "../styles/Hero.css";
 
 export default function Hero({ isLoaded }) {
@@ -70,6 +73,19 @@ export default function Hero({ isLoaded }) {
               <button className="btn btn-outline">Contact Me</button>
             </Link>
           </div>
+
+          {/* CV button — di bawah, full width */}
+          {cvLink ? (
+            <a href={cvLink} download="CV-Satria-Pamungkas.pdf" className="hero-cv-btn">
+              <FiDownload size={12} />
+              Download CV
+            </a>
+          ) : (
+            <button className="hero-cv-btn" disabled>
+              <FiDownload size={12} />
+              CV — Coming Soon
+            </button>
+          )}
         </div>
 
         {/* Center — big name + photo */}
@@ -130,7 +146,7 @@ export default function Hero({ isLoaded }) {
 
           <div className="hero-photo-wrap">
             <img
-              src="/src/assets/photo.jpg"
+              src={photoHero}
               alt={profileData.name}
               className="hero-photo"
               onError={e => {

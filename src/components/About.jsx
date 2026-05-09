@@ -1,6 +1,7 @@
 import { profileData, softSkills, hardSkills } from "../data/portfolioData";
 import { SiGo, SiNodedotjs, SiDart, SiPostgresql, SiDocker, SiGit } from "react-icons/si";
 import TextReveal from "./TextReveal";
+import photoImg from "../assets/photos.jpeg";
 import "../styles/About.css";
 
 const ICON_MAP = {
@@ -35,7 +36,7 @@ export default function About() {
           <div className="about-center">
             <span className="about-big-num">80%</span>
             <span className="about-big-label">Avg. Skill Level</span>
-            <div className="about-photo-placeholder"><img src="src/assets/photos.jpeg" alt="" /></div>
+            <div className="about-photo-placeholder"><img src={photoImg} alt="" /></div>
           </div>
 
           {/* Right — info cards */}
