@@ -90,21 +90,30 @@
   max-width: 240px;
   margin-bottom: var(--sp-4);
 }
+.hero-btn-group {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
 .hero-actions {
   display: flex;
   gap: var(--sp-2);
-  flex-wrap: wrap;
-  margin-bottom: var(--sp-3);
+  flex-wrap: nowrap;
+  margin-bottom: 0;
 }
 
-/* CV button — full width, below the two buttons */
+.hero-actions .btn {
+  flex: 1;
+}
+
+/* CV button — sama lebar dengan .hero-actions */
 .hero-cv-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--sp-1);
   width: 100%;
-  max-width: 320px;
   padding: var(--sp-2) var(--sp-3);
   background: transparent;
   border: 1px solid var(--border-md);
@@ -299,10 +308,14 @@
   .hero-left .hero-tagline { text-align: center; }
 
   /* Buttons center & full width */
-  .hero-actions {
-    justify-content: center;
+  .hero-btn-group {
+    align-items: center;
     width: 100%;
     max-width: 320px;
+    margin: 0 auto;
+  }
+  .hero-actions {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--sp-2);
@@ -314,11 +327,8 @@
     font-size: 0.8125rem;
   }
   .hero-cv-btn {
-    max-width: 320px;
-    width: 100%;
-    margin: 0 auto;
-    padding: var(--sp-2) var(--sp-2);
     font-size: 0.8125rem;
+    padding: var(--sp-2) var(--sp-2);
   }
 
   /* Sembunyikan kolom kanan — info redundant di mobile */
@@ -340,27 +350,16 @@
 }
 
 @media (max-width: 480px) {
-  /* Buttons stack vertikal */
   .hero-actions {
-    grid-template-columns: 1fr;
-    max-width: 280px;
+    grid-template-columns: 1fr 1fr;
+    max-width: 100%;
   }
-  .hero-actions .btn {
-    width: 100%;
-    justify-content: center;
-  }
-  .hero-cv-btn { max-width: 280px; }
-
-  /* Hello SVG lebih kecil */
+  .hero-btn-group { max-width: 280px; }
   .hero-hello-svg-wrap { max-width: 260px; }
-
-  /* Foto sedikit lebih kecil */
   .hero-photo-wrap {
     width: clamp(130px, 46vw, 180px);
     transform: rotate(-2deg);
   }
-
-  /* Sembunyikan copyright di footer bar */
   .hero-bottom-left { display: none; }
   .hero-bottom-right { justify-content: center; gap: var(--sp-4); }
 }

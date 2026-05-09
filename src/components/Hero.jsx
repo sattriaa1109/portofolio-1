@@ -65,27 +65,29 @@ export default function Hero({ isLoaded }) {
         <div className="hero-left">
           <p className="hero-tagline">Backend Developer</p>
           <p className="hero-desc">{profileData.tagline}</p>
-          <div className="hero-actions">
-            <Link to="works" smooth duration={600} offset={-60}>
-              <button className="btn btn-dark">View Works</button>
-            </Link>
-            <Link to="contact" smooth duration={600} offset={-60}>
-              <button className="btn btn-outline">Contact Me</button>
-            </Link>
-          </div>
+          {/* Buttons wrapper — CV sama lebar dengan dua button di atas */}
+          <div className="hero-btn-group">
+            <div className="hero-actions">
+              <Link to="works" smooth duration={600} offset={-60}>
+                <button className="btn btn-dark">View Works</button>
+              </Link>
+              <Link to="contact" smooth duration={600} offset={-60}>
+                <button className="btn btn-outline">Contact Me</button>
+              </Link>
+            </div>
 
-          {/* CV button — di bawah, full width */}
-          {cvLink ? (
-            <a href={cvLink} download="CV-Satria-Pamungkas.pdf" className="hero-cv-btn">
-              <FiDownload size={12} />
-              Download CV
-            </a>
-          ) : (
-            <button className="hero-cv-btn" disabled>
-              <FiDownload size={12} />
-              CV — Coming Soon
-            </button>
-          )}
+            {cvLink ? (
+              <a href={cvLink} download="CV-Satria-Pamungkas.pdf" className="hero-cv-btn">
+                <FiDownload size={12} />
+                Download CV
+              </a>
+            ) : (
+              <button className="hero-cv-btn" disabled>
+                <FiDownload size={12} />
+                CV — Coming Soon
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Center — big name + photo */}
