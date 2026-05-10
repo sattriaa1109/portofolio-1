@@ -2,7 +2,7 @@
 
 export const profileData = {
   name: "Satria Pamungkas",
-  role: "Backend Developer",
+  role: "Backend Engineer",
   tagline: "Building robust systems from the server side — one API at a time.",
   email: "satlfc767@gmail.com",
   github: "https://github.com/sattriaa1109",
