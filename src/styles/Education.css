@@ -124,8 +124,8 @@
   display: flex;
   gap: var(--sp-3);
   width: max-content;
-  /* Infinite scroll left — duration controls speed */
   animation: marquee-left 28s linear infinite;
+  will-change: transform;
 }
 .tech-marquee-track:hover { animation-play-state: paused; }
 
@@ -230,11 +230,12 @@
   gap: var(--sp-5);
   width: max-content;
   animation: marquee-left 20s linear infinite;
+  will-change: transform;
 }
-/* Second row goes right */
 .soft-marquee-track.reverse {
   animation: marquee-right 22s linear infinite;
   margin-top: var(--sp-2);
+  will-change: transform;
 }
 
 @keyframes marquee-right {

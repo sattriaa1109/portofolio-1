@@ -12,31 +12,33 @@ export default function TextReveal({ text, tag: Tag = 'span', className = '', de
     const el = elRef.current;
     if (!el) return;
 
-    // Split into words
     const split = new SplitType(el, { types: 'words' });
 
-    // Wrap each word in a mask div
+    // Wrap each word in a mask — done once, no extra DOM queries
     split.words.forEach((word) => {
       const mask = document.createElement('span');
-      mask.style.cssText = 'display:inline-block; overflow:hidden; vertical-align:bottom;';
+      mask.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;';
       word.parentNode.insertBefore(mask, word);
       mask.appendChild(word);
     });
 
-    // Set initial state — words hidden below mask
-    gsap.set(split.words, { yPercent: 110 });
+    gsap.set(split.words, { yPercent: 105 });
 
     const trigger = ScrollTrigger.create({
       trigger: el,
-      start: 'top 88%',
+      start: 'top 90%',
       once: true,
       onEnter: () => {
         gsap.to(split.words, {
           yPercent: 0,
-          duration: 0.75,
-          ease: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
-          stagger: 0.07,
+          duration: 0.65,
+          ease: 'power2.out',
+          stagger: 0.055,
           delay,
+          // Clear will-change after animation
+          onComplete: () => {
+            split.words.forEach(w => { w.style.willChange = 'auto'; });
+          },
         });
       },
     });

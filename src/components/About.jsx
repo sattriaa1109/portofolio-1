@@ -13,8 +13,8 @@ const ICON_MAP = {
   SiGit: <SiGit />,
 };
 
-// Duplicate arrays for seamless infinite scroll
-const doubledTech = [...hardSkills, ...hardSkills, ...hardSkills];
+// Duplicate arrays for seamless infinite scroll — doubled is enough
+const doubledTech = [...hardSkills, ...hardSkills];
 const doubledSoft = [...softSkills, ...softSkills, ...softSkills];
 
 export default function About() {

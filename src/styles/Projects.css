@@ -41,9 +41,8 @@
   display: block;
   filter: grayscale(15%);
   /* Start scaled up — GSAP will animate to scale(1) on scroll */
-  transform: scale(1.12);
+  transform: scale(1.05);
   transform-origin: center center;
-  will-change: transform;
   transition: filter var(--t-slow) var(--ease);
 }
 .project-img-wrap:hover img { filter: grayscale(0%); }

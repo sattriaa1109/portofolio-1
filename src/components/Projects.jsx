@@ -20,30 +20,17 @@ export default function Projects() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Image reveal scale: 1.12 → 1.0 on scroll
+      // Parallax hanya pada gambar yang ada (bukan coming soon)
       gsap.utils.toArray(".project-img-wrap img").forEach((img) => {
         gsap.to(img, {
           scale: 1,
           ease: "none",
           scrollTrigger: {
             trigger: img.parentElement,
-            start: "top 90%",
-            end: "bottom 30%",
-            scrub: true,
-          },
-        });
-      });
-
-      // Latest works image scale
-      gsap.utils.toArray(".lw-img-wrap img").forEach((img) => {
-        gsap.to(img, {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img.parentElement,
-            start: "top 95%",
-            end: "bottom 40%",
-            scrub: true,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,          // lebih tinggi = lebih smooth, lebih ringan
+            invalidateOnRefresh: false,
           },
         });
       });
@@ -79,6 +66,8 @@ export default function Projects() {
                     <img
                       src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
                       alt={p.title}
+                      loading="lazy"
+                      decoding="async"
                     />
                   )}
                   <span className="project-num">{String(i + 1).padStart(2, "0")}</span>

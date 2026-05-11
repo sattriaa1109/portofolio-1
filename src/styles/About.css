@@ -167,6 +167,7 @@
   gap: var(--sp-4);
   width: max-content;
   animation: scroll-left 25s linear infinite;
+  will-change: transform;
 }
 .about-tech-track:hover {
   animation-play-state: paused;
@@ -223,6 +224,7 @@
   gap: var(--sp-5);
   width: max-content;
   animation: scroll-left 20s linear infinite;
+  will-change: transform;
 }
 .about-soft-item {
   display: flex;

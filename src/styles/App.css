@@ -75,12 +75,7 @@ body {
   font-feature-settings: "kern" 1, "liga" 1;
 }
 
-/* ── Lenis ── */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
-.lenis.lenis-scrolling iframe { pointer-events: none; }
+/* Native scroll */
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 3px; }
@@ -91,18 +86,7 @@ html.lenis, html.lenis body { height: auto; }
 /* ── Selection ── */
 ::selection { background: rgba(26,26,26,0.10); }
 
-/* ── Global grain overlay — "anti-digital-flat" ── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.032;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
+/* Grain overlay removed — was causing constant GPU repaint */
 
 /* ── Animations ── */
 @keyframes fadeUp {
