@@ -8,6 +8,8 @@ import "../styles/Projects.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const images = import.meta.glob("../assets/**/*.{png,jpg,jpeg,svg,webp}", { eager: true });
+
 const FALLBACK_IMGS = [
   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&auto=format&fit=crop",
@@ -20,7 +22,6 @@ export default function Projects() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Parallax hanya pada gambar yang ada (bukan coming soon)
       gsap.utils.toArray(".project-img-wrap img").forEach((img) => {
         gsap.to(img, {
           scale: 1,
@@ -29,7 +30,7 @@ export default function Projects() {
             trigger: img.parentElement,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.5,          // lebih tinggi = lebih smooth, lebih ringan
+            scrub: 1.5,
             invalidateOnRefresh: false,
           },
         });
@@ -39,9 +40,16 @@ export default function Projects() {
     return () => ctx.revert();
   }, []);
 
+  const getImageUrl = (imagePath, index) => {
+    if (!imagePath) return FALLBACK_IMGS[index % FALLBACK_IMGS.length];
+    if (imagePath.startsWith("http")) return imagePath;
+    
+    const cleanPath = imagePath.replace("src/", "../");
+    return images[cleanPath]?.default || images[cleanPath] || FALLBACK_IMGS[index % FALLBACK_IMGS.length];
+  };
+
   return (
     <div ref={ref}>
-      {/* ── Selected Works — alternating rows ── */}
       <section className="works-section" id="works">
         <div className="container">
           <div className="works-header">
@@ -51,58 +59,66 @@ export default function Projects() {
             </h2>
           </div>
 
-          {projectsData.map((p, i) => (
-            <div key={p.id} className={`project-row ${i % 2 === 0 ? "odd" : "even"}`}>
-              {/* Image — always order 1 on mobile */}
-              <div className="project-img-col" style={{ order: 1 }}>
-                <div className="project-img-wrap">
-                  {p.comingSoon ? (
-                    <div className="project-coming-soon">
-                      <span className="project-coming-soon-dot" />
-                      <span className="project-coming-soon-text">On Development</span>
-                      <span className="project-coming-soon-sub">{p.title}</span>
-                    </div>
-                  ) : (
-                    <img
-                      src={p.image || FALLBACK_IMGS[i % FALLBACK_IMGS.length]}
-                      alt={p.title}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  )}
-                  <span className="project-num">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-              </div>
+          {projectsData.map((p, i) => {
+            const isLocalImage = p.image && !p.image.startsWith("http");
+            const shouldHideImage = p.comingSoon && !isLocalImage;
 
-              {/* Text — always order 2 on mobile */}
-              <div className="project-text-col" style={{ order: 2 }}>
-                <div className="project-index">Project {String(i + 1).padStart(2, "0")}</div>
-                <h3 className="project-title">{p.title}</h3>
-                <p className="project-desc">{p.description}</p>
-                <div className="project-tags">
-                  {p.tech.map(t => (
-                    <span key={t} className="pill">{t}</span>
-                  ))}
+            return (
+              <div key={p.id} className={`project-row ${i % 2 === 0 ? "odd" : "even"}`}>
+                <div className="project-img-col" style={{ order: 1 }}>
+                  <div className="project-img-wrap" style={{ position: "relative", overflow: "hidden" }}>
+                    
+                    {!shouldHideImage ? (
+                      <img
+                        src={getImageUrl(p.image, i)}
+                        alt={p.title}
+                        loading="lazy"
+                        decoding="async"
+                        style={{ 
+                          width: "100%", 
+                          height: "100%", 
+                          objectFit: "cover"
+                        }}
+                      />
+                    ) : (
+                      <div className="project-coming-soon">
+                        <span className="project-coming-soon-dot" />
+                        <span className="project-coming-soon-text">On Development</span>
+                        <span className="project-coming-soon-sub">{p.title}</span>
+                      </div>
+                    )}
+
+                    <span className="project-num">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
                 </div>
-                <div className="project-links">
-                  {p.github && (
-                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link" aria-label="GitHub">
-                      <FiGithub />
-                    </a>
-                  )}
-                  {p.demo && (
-                    <a href={p.demo} target="_blank" rel="noopener noreferrer" className="project-link" aria-label="Demo">
-                      <FiExternalLink />
-                    </a>
-                  )}
+
+                <div className="project-text-col" style={{ order: 2 }}>
+                  <div className="project-index">Project {String(i + 1).padStart(2, "0")}</div>
+                  <h3 className="project-title">{p.title}</h3>
+                  <p className="project-desc">{p.description}</p>
+                  <div className="project-tags">
+                    {p.tech.map(t => (
+                      <span key={t} className="pill">{t}</span>
+                    ))}
+                  </div>
+                  <div className="project-links">
+                    {p.github && (
+                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link" aria-label="GitHub">
+                        <FiGithub />
+                      </a>
+                    )}
+                    {p.demo && (
+                      <a href={p.demo} target="_blank" rel="noopener noreferrer" className="project-link" aria-label="Demo">
+                        <FiExternalLink />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
-
-      {/* ── Latest Works grid ── */}
     </div>
   );
 }

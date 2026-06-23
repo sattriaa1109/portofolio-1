@@ -1,4 +1,4 @@
-
+import simpegImg from "../assets/simpeg.png";
 
 export const profileData = {
   name: "Satria Pamungkas",
@@ -98,7 +98,7 @@ export const softSkills = [
 export const educationData = [
   {
     id: 1,
-    school: "SMK Wikrama Bogr",
+    school: "SMK Wikrama Bogor",
     major: "Rekayasa Perangkat Lunak (RPL)",
     year: "2024 – Sekarang",
     description:
@@ -145,13 +145,13 @@ export const projectsData = [
     id: 3,
     title: "Website Sistem Managemen Pegawai",
     description:
-      "Website Sistem Managemen Pegawai menggunakan ReactJS untuk frontend dan juga menggunakan FiberGO untuk backend. menampilkan absen karyawan sampai dengan chart penggajian pegawai, absen menggunakan qr yang dapat di scan dan absen secara online yang mendapatkan lokasi terbau karyawan",
+      "Website Sistem Managemen Pegawai menggunakan ReactJS untuk frontend dan juga menggunakan FiberGO untuk backend. menampilkan absen karyawan sampai dengan chart penggajian pegawai, absen menggunakan qr yang dapat di scan dan absen secara online yang mendapatkan lokasi terbaru karyawan",
     tech: ["Golang", "Fiber", "ReactJS", "Postgresql"],
     github: "https://github.com/sattriaa1109/simpeg-be",
     demo: null,
     color: "#0175C2",
     comingSoon: true,
-    image: "src/assets/simpeg.png",
+    image: simpegImg,
   },
   {
     id: 4,
