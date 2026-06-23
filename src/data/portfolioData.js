@@ -60,15 +60,39 @@ export const hardSkills = [
     description: "Version control, Branching, Pull Request",
     color: "#F05032",
   },
+  {
+    id: 7,
+    name: "Flutter",
+    level: 65,
+    icon: "SiFlutter",
+    description: "Cross-platform mobile development",
+    color: "#54C5F8",
+  },
+  {
+    id: 8,
+    name: "Swift",
+    level: 40,
+    icon: "SiSwift",
+    description: "iOS development, SwiftUI",
+    color: "#F05138",
+  },
+  {
+    id: 9,
+    name: "Kotlin",
+    level: 45,
+    icon: "SiKotlin",
+    description: "Android development, JVM",
+    color: "#7F52FF",
+  },
 ];
 
 export const softSkills = [
-  { id: 1, name: "Problem Solving",  },
-  { id: 2, name: "Kerja Tim", },
-  { id: 3, name: "Manajemen Waktu", },
-  { id: 4, name: "Cepat Belajar", },
-  { id: 5, name: "Komunikasi", },
-  { id: 6, name: "Analitis", },
+  { id: 1, name: "Problem Solving" },
+  { id: 2, name: "Kerja Tim" },
+  { id: 3, name: "Manajemen Waktu" },
+  { id: 4, name: "Cepat Belajar" },
+  { id: 5, name: "Komunikasi" },
+  { id: 6, name: "Analitis" },
 ];
 
 export const educationData = [
@@ -119,15 +143,15 @@ export const projectsData = [
   },
   {
     id: 3,
-    title: "Aplikasi Mobile dengan Flutter/Dart",
+    title: "Website Sistem Managemen Pegawai",
     description:
-      "Aplikasi Sewa Mobil (Rent Car) yang dibuat menggunakan Flutter dan Golang. Memiliki fitur tambah, edit, hapus catatan, serta penyimpanan lokal menggunakan Hive.",
-    tech: ["Dart", "Flutter", "Hive", "Provider"],
-    github: "https://github.com/sattriaa1109/rentcar.git",
+      "Website Sistem Managemen Pegawai menggunakan ReactJS untuk frontend dan juga menggunakan FiberGO untuk backend. menampilkan absen karyawan sampai dengan chart penggajian pegawai, absen menggunakan qr yang dapat di scan dan absen secara online yang mendapatkan lokasi terbau karyawan",
+    tech: ["Golang", "Fiber", "ReactJS", "Postgresql"],
+    github: "https://github.com/sattriaa1109/simpeg-be",
     demo: null,
     color: "#0175C2",
     comingSoon: true,
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=900&auto=format&fit=crop",
+    image: "src/assets/simpeg.png",
   },
   {
     id: 4,

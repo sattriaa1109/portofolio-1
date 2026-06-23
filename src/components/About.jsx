@@ -1,5 +1,5 @@
 import { profileData, softSkills, hardSkills } from "../data/portfolioData";
-import { SiGo, SiNodedotjs, SiDart, SiPostgresql, SiDocker, SiGit } from "react-icons/si";
+import { SiGo, SiNodedotjs, SiDart, SiPostgresql, SiDocker, SiGit, SiFlutter, SiSwift, SiKotlin } from "react-icons/si";
 import TextReveal from "./TextReveal";
 import photoImg from "../assets/photos.jpeg";
 import "../styles/About.css";
@@ -11,6 +11,9 @@ const ICON_MAP = {
   SiPostgresql: <SiPostgresql />,
   SiDocker: <SiDocker />,
   SiGit: <SiGit />,
+  SiFlutter: <SiFlutter />,
+  SiSwift: <SiSwift />,
+  SiKotlin: <SiKotlin />,
 };
 
 // Duplicate arrays for seamless infinite scroll — doubled is enough

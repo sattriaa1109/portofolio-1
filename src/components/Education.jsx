@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   SiGo, SiNodedotjs, SiDart, SiPostgresql, SiDocker, SiGit,
+  SiFlutter, SiSwift, SiKotlin,
 } from "react-icons/si";
 import { educationData, hardSkills, softSkills } from "../data/portfolioData";
 import TextReveal from "./TextReveal";
@@ -17,6 +18,9 @@ const ICON_MAP = {
   SiPostgresql: <SiPostgresql />,
   SiDocker:     <SiDocker />,
   SiGit:        <SiGit />,
+  SiFlutter:    <SiFlutter />,
+  SiSwift:      <SiSwift />,
+  SiKotlin:     <SiKotlin />,
 };
 
 // Duplicate array for seamless infinite loop
